@@ -19,7 +19,9 @@ namespace HotelListing.Repository.IRepository
 
         //gets only one record
 
-        Task<T> Get(Expression<Func<T, bool>> expression, List<string> includes = null);
+        Task<T> Get(
+            Expression<Func<T, bool>> expression,
+            List<string> includes = null);
 
         Task Insert(T entity);
 
