@@ -2,6 +2,8 @@ using HotelListing.Configurations;
 using HotelListing.Data;
 using HotelListing.Repository;
 using HotelListing.Repository.IRepository;
+using HotelListing.Services;
+using HotelListing.Services.IServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,10 +43,12 @@ namespace HotelListing
 
             services.AddAuthentication();
             services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration);
 
             services.AddAutoMapper(typeof(MapperInitilizer));
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAuthManager, AuthManager>();
 
             services.AddSwaggerGen(c =>
             {
@@ -70,8 +74,10 @@ namespace HotelListing
 
             app.UseHttpsRedirection();;
 
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

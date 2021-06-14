@@ -58,6 +58,9 @@ namespace HotelListing.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
@@ -205,6 +208,22 @@ namespace HotelListing.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "b472f6eb-cbb1-40a0-ae73-27d8f15d6464",
+                            ConcurrencyStamp = "35436590-d569-477c-bcde-7f915658d9d9",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "4d5ad5a6-6278-46bb-96eb-84e592041372",
+                            ConcurrencyStamp = "52627fa3-679d-4d15-a84b-bffc19832bf1",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
